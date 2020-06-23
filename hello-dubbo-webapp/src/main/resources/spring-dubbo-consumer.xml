@@ -7,15 +7,11 @@
         http://code.alibabatech.com/schema/dubbo
         http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <!-- 提供方应用信息，用于计算依赖关系 -->
-    <dubbo:application name="hello-dubbo-api"/>
+    <dubbo:application name="hello-dubbo-webapp"/>
 
-    <!-- 直连 -->
-    <dubbo:registry address="N/A"/>
-    <dubbo:protocol name="dubbo" port="20880"/>
-
-    <!-- zookeeper -->
-
-    <dubbo:service ref="helloService" interface="cn.znvis.hello.dubbo.api.HelloService"/>
-    <bean id="helloService" class="cn.znvis.hello.dubbo.service.impl.HelloServiceImpl"/>
+    <!-- 方式一：直连 -->
+    <!--    <dubbo:reference id="helloService" url="dubbo://localhost:20880" interface="cn.znvis.hello.dubbo.api.HelloService"/>-->
+    <!-- 方式二：zookeeper -->
+    <dubbo:registry address="${zookeeper.address}"/>
+    <dubbo:reference id="helloService" interface="cn.znvis.hello.dubbo.api.HelloService"/>
 </beans>
